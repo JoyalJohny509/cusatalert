@@ -6,8 +6,7 @@ body {
     margin: 0;
     padding: 0;
     text-align: center;
-    background-image: url('https://i.redd.it/anyone-from-cusat-v0-mqxbbjmb0sld1.jpg?width=1080&format=pjpg&auto=webp&s=1f807313c68f97b0546de62ede3ab87cb132bdce');
-    /* Change to your image */
+    background-image: url('https://i.redd.it/anyone-from-cusat-v0-mqxbbjmb0sld1.jpg?width=1080&format=pjpg&auto=webp&s=1f807313c68f97b0546de62ede3ab87cb132bdce'); /* Ensure this image exists in the correct directory */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -17,13 +16,12 @@ body {
 
 body::before {
     content: "";
-    position: absolute;
+    position: fixed; /* Ensures it covers the whole page */
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5);
-    /* Adjust opacity here */
+    background: rgba(255, 255, 255, 0.5); /* Adjust opacity */
     z-index: -1;
 }
 
@@ -59,6 +57,7 @@ button:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     margin-top: 20px;
 }
 
@@ -70,7 +69,7 @@ button:hover {
 /* Map */
 #map-container {
     width: 90%;
-    height: 400px;
+    min-height: 400px; /* Ensures it's always visible */
     margin: 20px auto;
     border-radius: 10px;
     border: 2px solid #4d1f00;
