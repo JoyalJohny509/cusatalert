@@ -1,0 +1,114 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header */
+header {
+    background: #4d1f00;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 24px;
+}
+
+/* Buttons */
+button {
+    background: #8b3e2f;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin: 10px;
+    border-radius: 8px;
+}
+
+button:hover {
+    background: #ff0000;
+    transform: scale(1.05);
+}
+
+/* Home Page Buttons */
+.homepage-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.homepage-buttons button {
+    width: 80%;
+    max-width: 300px;
+}
+
+/* Map */
+#map-container {
+    width: 90%;
+    height: 400px;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 2px solid #4d1f00;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+    display: block;
+    margin: 10px auto;
+    padding: 12px;
+    width: 80%;
+    max-width: 400px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Emergency Contact Buttons */
+.emergency-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.call-button {
+    width: 80%;
+    max-width: 300px;
+    padding: 14px;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.call-button.police {
+    background-color: #d32f2f;
+}
+
+.call-button.security {
+    background-color: #ff9800;
+}
+
+.call-button.hospital {
+    background-color: #00796b;
+}
+
+.call-button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* Go Back / Home Button */
+button.home {
+    background: #555;
+}
+
+button.home:hover {
+    background: #777;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report an Incident</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="incident.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Report an Incident</h1>
+    </header>
+
+    <select id="incident-type">
+        <option value="Stalking">Stalking</option>
+        <option value="Verbal Abuse">Verbal Abuse</option>
+        <option value="Assault">Assault</option>
+        <option value="Other">Other</option>
+    </select>
+
+    <textarea id="incident-details" placeholder="Additional details (optional)"></textarea>
+
+    <button onclick="sendWhatsAppAlert()">🚨 Send Alert via WhatsApp</button>
+
+    <button onclick="window.location.href='index.html'">🏠 Home</button>
+</body>
+
+</html>
