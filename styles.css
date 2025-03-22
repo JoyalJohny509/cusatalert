@@ -1,12 +1,13 @@
 /* General Styles */
-body {
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    margin: 0;
-    padding: 0;
     text-align: center;
-    background-image: url('https://i.redd.it/anyone-from-cusat-v0-mqxbbjmb0sld1.jpg?width=1080&format=pjpg&auto=webp&s=1f807313c68f97b0546de62ede3ab87cb132bdce'); /* Ensure this image exists in the correct directory */
+    background-image: url('https://i.redd.it/anyone-from-cusat-v0-mqxbbjmb0sld1.jpg?width=1080&format=pjpg&auto=webp&s=1f807313c68f97b0546de62ede3ab87cb132bdce');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -16,12 +17,12 @@ body {
 
 body::before {
     content: "";
-    position: fixed; /* Ensures it covers the whole page */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(255, 255, 255, 0.5); /* Adjust opacity */
+    background: rgba(255, 255, 255, 0.3); /* Reduced opacity for better visibility */
     z-index: -1;
 }
 
@@ -66,13 +67,32 @@ button:hover {
     max-width: 300px;
 }
 
-/* Map */
+/* Map Styling - Optimized for both desktop and mobile */
 #map-container {
-    width: 90%;
-    min-height: 400px; /* Ensures it's always visible */
+    width: 100%;
+    height: 500px;
+    min-height: 400px;
+    max-width: 90vw;
     margin: 20px auto;
     border-radius: 10px;
     border: 2px solid #4d1f00;
+}
+
+/* Responsive Design for Mobile */
+@media (max-width: 768px) {
+    header {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    #map-container {
+        height: 400px;
+    }
 }
 
 /* Inputs */
@@ -82,7 +102,7 @@ textarea {
     display: block;
     margin: 10px auto;
     padding: 12px;
-    width: 80%;
+    width: 90%;
     max-width: 400px;
     border: 1px solid #ccc;
     border-radius: 5px;
