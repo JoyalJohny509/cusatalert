@@ -1,5 +1,5 @@
 let userLat, userLng;
-const API_KEY = "5b3ce3597851110001cf624837de18e6f33a451092e79a18e891b9ea";
+const API_KEY = "AIzaSyBBTq0DYEErpiQlfOcd5TLLxuyGYPfla-4";
 
 document.addEventListener("DOMContentLoaded", function () {
     const map = L.map('map-container').setView([10.0468, 76.3287], 15);
@@ -12,13 +12,16 @@ document.addEventListener("DOMContentLoaded", function () {
         userLat = position.coords.latitude;
         userLng = position.coords.longitude;
         L.marker([userLat, userLng]).addTo(map).bindPopup("You are here").openPopup();
+    }, error => {
+        console.error("Geolocation error:", error);
+        alert("Failed to get location. Please enable location services.");
     });
 });
 
 function searchPlace() {
     const placeName = document.getElementById("destination").value;
 
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${placeName}`)
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(placeName)}`)
         .then(response => response.json())
         .then(data => {
             if (data.length > 0) {
@@ -28,7 +31,8 @@ function searchPlace() {
             } else {
                 alert("Destination not found.");
             }
-        });
+        })
+        .catch(error => console.error("Error fetching location:", error));
 }
 
 function findSafeRoute(startLat, startLng, endLat, endLng) {
@@ -37,12 +41,47 @@ function findSafeRoute(startLat, startLng, endLat, endLng) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            const route = data.routes[0].geometry;
-            const coordinates = decodePolyline(route);
-            drawRoute(coordinates);
-        });
+            if (data.routes && data.routes.length > 0) {
+                const route = data.routes[0].geometry;
+                const coordinates = decodePolyline(route);
+                drawRoute(coordinates);
+            } else {
+                alert("No route found. Try a different destination.");
+            }
+        })
+        .catch(error => console.error("Error fetching route:", error));
 }
 
 function drawRoute(coords) {
     L.polyline(coords, { color: "blue" }).addTo(map);
+}
+
+function decodePolyline(polyline) {
+    let points = [];
+    let index = 0, lat = 0, lng = 0;
+
+    while (index < polyline.length) {
+        let shift = 0, result = 0;
+        let byte;
+        do {
+            byte = polyline.charCodeAt(index++) - 63;
+            result |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+        let deltaLat = (result & 1) ? ~(result >> 1) : (result >> 1);
+        lat += deltaLat;
+
+        shift = 0;
+        result = 0;
+        do {
+            byte = polyline.charCodeAt(index++) - 63;
+            result |= (byte & 0x1F) << shift;
+            shift += 5;
+        } while (byte >= 0x20);
+        let deltaLng = (result & 1) ? ~(result >> 1) : (result >> 1);
+        lng += deltaLng;
+
+        points.push([lat / 1e5, lng / 1e5]);
+    }
+    return points;
 }
