@@ -1,11 +1,16 @@
 let userLat, userLng;
+let map;
 const API_KEY = "AIzaSyBBTq0DYEErpiQlfOcd5TLLxuyGYPfla-4";
+const directionsService = new google.maps.DirectionsService();
+const directionsRenderer = new google.maps.DirectionsRenderer();
 
 document.addEventListener("DOMContentLoaded", function () {
-    const map = new google.maps.Map(document.getElementById("map-container"), {
+    map = new google.maps.Map(document.getElementById("map-container"), {
         center: { lat: 10.0468, lng: 76.3287 },
         zoom: 15,
     });
+
+    directionsRenderer.setMap(map);
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(position => {
@@ -42,11 +47,6 @@ function searchPlace() {
 }
 
 function findSafeRoute(startLat, startLng, endLat, endLng) {
-    const directionsService = new google.maps.DirectionsService();
-    const directionsRenderer = new google.maps.DirectionsRenderer();
-
-    directionsRenderer.setMap(map);
-
     const request = {
         origin: { lat: startLat, lng: startLng },
         destination: { lat: endLat, lng: endLng },
