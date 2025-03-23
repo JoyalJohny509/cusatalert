@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,44 +7,29 @@
     <link rel="stylesheet" href="styles.css">
     <script defer src="incident.js"></script>
 </head>
-
 <body>
     <header>
         <h1>Report an Incident</h1>
     </header>
 
-    <select id="incident-type">
-        <option value="Stalking">Stalking</option>
-        <option value="Verbal Abuse">Verbal Abuse</option>
-        <option value="Assault">Assault</option>
-        <option value="Other">Other</option>
-    </select>
+    <form onsubmit="event.preventDefault(); sendWhatsAppAlert();">
+        <label for="incident-type">Select Incident Type:</label>
+        <select id="incident-type" required>
+            <option value="Stalking">Stalking</option>
+            <option value="Verbal Abuse">Verbal Abuse</option>
+            <option value="Assault">Assault</option>
+            <option value="Other">Other</option>
+        </select>
 
-    <textarea id="incident-details" placeholder="Additional details (optional)"></textarea>
+        <label for="incident-details">Additional Details (Optional):</label>
+        <textarea id="incident-details" placeholder="Describe the incident..."></textarea>
 
-    <input type="text" id="whatsapp-number" placeholder="Enter WhatsApp Number (with country code)">
-    
-    <button onclick="sendWhatsAppAlert()">🚨 Send Alert via WhatsApp</button>
+        <label for="whatsapp-number">Enter WhatsApp Number (with country code):</label>
+        <input type="text" id="whatsapp-number" placeholder="+1234567890" required>
+
+        <button type="submit">🚨 Send Alert via WhatsApp</button>
+    </form>
 
     <button onclick="window.location.href='index.html'">🏠 Home</button>
-
-    <script>
-        function sendWhatsAppAlert() {
-            const phoneNumber = document.getElementById("whatsapp-number").value.trim();
-            if (!phoneNumber) {
-                alert("Please enter a WhatsApp number.");
-                return;
-            }
-
-            const incidentType = document.getElementById("incident-type").value;
-            const details = document.getElementById("incident-details").value.trim();
-
-            let message = `🚨 URGENT! Incident: ${incidentType}\n`;
-            if (details) message += `Details: ${details}\n`;
-
-            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
-        }
-    </script>
 </body>
-
 </html>
