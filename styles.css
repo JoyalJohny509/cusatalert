@@ -74,6 +74,10 @@ button:hover {
         min-height: 300px;
     }
 }
+#map-container {
+    width: 100%;
+    height: 500px;
+}
 
 
 /* Responsive Design for Mobile */
