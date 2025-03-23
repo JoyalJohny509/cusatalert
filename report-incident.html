@@ -23,9 +23,29 @@
 
     <textarea id="incident-details" placeholder="Additional details (optional)"></textarea>
 
+    <input type="text" id="whatsapp-number" placeholder="Enter WhatsApp Number (with country code)">
+    
     <button onclick="sendWhatsAppAlert()">🚨 Send Alert via WhatsApp</button>
 
     <button onclick="window.location.href='index.html'">🏠 Home</button>
+
+    <script>
+        function sendWhatsAppAlert() {
+            const phoneNumber = document.getElementById("whatsapp-number").value.trim();
+            if (!phoneNumber) {
+                alert("Please enter a WhatsApp number.");
+                return;
+            }
+
+            const incidentType = document.getElementById("incident-type").value;
+            const details = document.getElementById("incident-details").value.trim();
+
+            let message = `🚨 URGENT! Incident: ${incidentType}\n`;
+            if (details) message += `Details: ${details}\n`;
+
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, "_blank");
+        }
+    </script>
 </body>
 
 </html>
